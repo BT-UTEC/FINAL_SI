@@ -4,6 +4,7 @@ from flask.wrappers import Response
 from model import entities
 import json
 
+MIMETYPE = 'application/json'
 db = connector.Manager()
 engine = db.create_engine()
 
@@ -33,9 +34,9 @@ def create_message():
         session.add(message)
         session.commit()
 
-        return Response(status=200, mimetype='application/json')
+        return Response(status=200, mimetype=MIMETYPE)
     except Exception:
-        return Response(status=401, mimetype='application/json')
+        return Response(status=401, mimetype=MIMETYPE)
 
 @app.route('/message/<topic>', methods = ['GET'])
 def get_messages(topic):
@@ -45,11 +46,11 @@ def get_messages(topic):
     messages = db_response[:]
 
     if len(messages) > 0:
-        return Response(json.dumps(messages, cls=connector.AlchemyEncoder), mimetype='application/json')
+        return Response(json.dumps(messages, cls=connector.AlchemyEncoder), mimetype=MIMETYPE)
     else:
         message = {'status': 404, 'message': 'Not Found'}
 
-        return Response(message, status=404, mimetype='application/json')
+        return Response(message, status=404, mimetype=MIMETYPE)
 
 if __name__ == '__main__':
     app.secret_key = ".."
