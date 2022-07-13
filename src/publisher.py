@@ -5,6 +5,7 @@ API_ENDPOINT = 'http://127.0.0.1:8080/message'
 
 class Publisher():
     def __init__(self) -> None:
+        # Here goes the publisher parameters
         pass
     
     def send_message(self, message: str, topic: str):

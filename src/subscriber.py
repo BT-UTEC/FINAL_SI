@@ -5,6 +5,7 @@ API : str = 'http://127.0.0.1:8080/message'
 
 class Subscriber():
     def __init__(self) -> None:
+        # Here goes the subscriber parameters
         pass
     
     def get_messages(self, topic: str):

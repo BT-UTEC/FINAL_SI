@@ -5,19 +5,19 @@ from sqlalchemy.ext.declarative import DeclarativeMeta
 import json
 
 class Manager:
-    Base = declarative_base()
+    base = declarative_base()
     session = None
 
-    def createEngine(self):
+    def create_engine(self):
         engine = create_engine('postgresql://postgres:postgres@localhost/BT')
-        self.Base.metadata.create_all(engine)
+        self.base.metadata.create_all(engine)
 
         return engine
 
-    def getSession(self, engine):
+    def get_session(self, engine):
         if self.session == None:
-            Session = sessionmaker(bind=engine)
-            session = Session()
+            _session = sessionmaker(bind=engine)
+            session = _session()
 
         return session
 

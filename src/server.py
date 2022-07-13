@@ -5,13 +5,13 @@ from model import entities
 import json
 
 db = connector.Manager()
-engine = db.createEngine()
+engine = db.create_engine()
 
 app = Flask(__name__)
 
 @app.route('/create_message', methods = ['GET'])
 def create_test_message():
-    db_session = db.getSession(engine)
+    db_session = db.get_session(engine)
     message = entities.Message(
             message = "Final exam in progress",
             topic = "SE",
@@ -29,7 +29,7 @@ def create_message():
             message=message['message'],
             topic=message['topic']
         )
-        session = db.getSession(engine)
+        session = db.get_session(engine)
         session.add(message)
         session.commit()
 
@@ -39,7 +39,7 @@ def create_message():
 
 @app.route('/message/<topic>', methods = ['GET'])
 def get_messages(topic):
-    db_session = db.getSession(engine)
+    db_session = db.get_session(engine)
     
     db_response = db_session.query(entities.Message).filter(entities.Message.topic == topic)
     messages = db_response[:]
